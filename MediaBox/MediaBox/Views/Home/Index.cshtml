@@ -1,0 +1,61 @@
+﻿@using MediaBox.Models;
+
+@model DataModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Deserialize Me</h1>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <table>
+            <tr>
+                <td style="width: 200px;"><b>ProjectID</b></td>
+                <td style="width: 300px;"><b>ProjectNumber</b></td>
+                <td style="width: 500px;"><b>AllSubmissions</b></td>
+            </tr>
+
+            @foreach (var obj in Model.Proj)
+            {
+                <tr>
+                    <td style="vertical-align: top; background-color: #ececec;">@obj.ProjectID</td>
+                    <td style="vertical-align: top;">@obj.ProjectNumber</td>
+                    <td style="vertical-align: top;">
+                        <table>
+                            <tr style="background-color: #00ff90;">
+                                <td>Sub Type</td>
+                                <td>SubmissionID</td>
+                                <td>SubmissionNumber</td>
+                            </tr>
+                            @if (obj.AllSubmissions != null)
+                            {
+                                foreach (var sub in obj.AllSubmissions.Sub)
+                                {
+                                    <tr>
+                                        <td style="border-left: solid 1px #000000; border-bottom: solid 1px #000000;">@sub.Type</td>
+                                        <td style="border-bottom: solid 1px #000000;">@sub.SubmissionID</td>
+                                        <td style="border-right: solid 1px #000000; border-bottom: solid 1px #000000;">@sub.SubmissionNumber</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="3" style="border-left: solid 1px #000000; border-bottom: solid 1px #000000; border-right: solid 1px #000000;">No Submissions</td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        
+    </div>
+    
+</div>
