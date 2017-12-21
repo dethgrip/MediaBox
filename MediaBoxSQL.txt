@@ -1,0 +1,12 @@
+SELECT a.ProjectID
+	, a.ProjectNumber,
+	(
+		SELECT b.SubmissionType AS '@Type'
+		    , b.SubmissionID
+			, b.SubmissionNumber
+		FROM @Submissions b
+		WHERE b.ProjectID = a.ProjectID
+		FOR XML PATH ('Sub'), ROOT ('AllSubmissions'), TYPE
+	)
+FROM @Projects a
+FOR XML PATH ('Proj'), ROOT ('AllProjects'), ELEMENTS;
